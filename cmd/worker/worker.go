@@ -3,8 +3,8 @@ package worker
 import (
 	"log"
 
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/redis"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/config"
-	"github.com/dedihartono801/go-clean-architecture-v2/pkg/queue/redis"
 	"github.com/hibiken/asynq"
 )
 

@@ -6,12 +6,12 @@ import (
 	"sync"
 	"time"
 
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/redis"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/entity"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/customstatus"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/dto"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/identifier"
-	"github.com/dedihartono801/go-clean-architecture-v2/pkg/queue/redis"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/validator"
 	"github.com/gofiber/fiber/v2"
 	"github.com/hibiken/asynq"

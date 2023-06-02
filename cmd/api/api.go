@@ -4,8 +4,8 @@ import (
 	"log"
 
 	"github.com/dedihartono801/go-clean-architecture-v2/cmd/api/routes"
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/redis"
 	handler "github.com/dedihartono801/go-clean-architecture-v2/internal/delivery/http"
-	"github.com/dedihartono801/go-clean-architecture-v2/pkg/queue/redis"
 
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/admin"

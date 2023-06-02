@@ -3,8 +3,8 @@ package middleware
 import (
 	"time"
 
-	"github.com/dedihartono801/go-clean-architecture-v2/helpers"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/config"
+	"github.com/dedihartono801/go-clean-architecture-v2/pkg/helpers"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gofiber/fiber/v2"
 )
