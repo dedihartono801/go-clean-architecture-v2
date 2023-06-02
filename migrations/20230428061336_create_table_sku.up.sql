@@ -1,0 +1,9 @@
+CREATE TABLE sku (
+    id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    stock int NOT NULL,
+    price int NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+    PRIMARY KEY(id)
+)ENGINE = InnoDB;

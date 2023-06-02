@@ -1,0 +1,466 @@
+definitions:
+  dto.ProductDto:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      stock:
+        type: string
+    type: object
+  entity.Admin:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  entity.Book:
+    properties:
+      author:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      title:
+        type: string
+      updatedAt:
+        type: string
+    required:
+    - author
+    - title
+    type: object
+  entity.Sku:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      stock:
+        type: integer
+      updated_at:
+        type: string
+    required:
+    - name
+    - price
+    - stock
+    type: object
+  entity.Transaction:
+    properties:
+      admin_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      total_quantity:
+        type: integer
+      total_transaction:
+        type: integer
+      updated_at:
+        type: string
+    required:
+    - admin_id
+    - total_quantity
+    - total_transaction
+    type: object
+  entity.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    required:
+    - email
+    - name
+    type: object
+info:
+  contact:
+    email: dedihartono801@mail.com
+    name: Dedi Hartono
+  description: This is an auto-generated API Docs.
+  title: API
+  version: "1.0"
+paths:
+  /admin:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Admin'
+      security:
+      - ApiKeyAuth: []
+      summary: Get Profile Admin
+      tags:
+      - admin
+  /admin/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Admin'
+      summary: Create Admin
+      tags:
+      - admin
+  /admin/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Admin'
+      summary: Login admin
+      tags:
+      - admin
+  /books:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Book'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: List book
+      tags:
+      - books
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Book'
+      security:
+      - ApiKeyAuth: []
+      summary: Create book
+      tags:
+      - books
+  /books/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - ApiKeyAuth: []
+      summary: Delete book
+      tags:
+      - books
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Book'
+      security:
+      - ApiKeyAuth: []
+      summary: Find book
+      tags:
+      - books
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Book'
+      security:
+      - ApiKeyAuth: []
+      summary: Update book
+      tags:
+      - books
+  /checkout:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.Transaction'
+      security:
+      - ApiKeyAuth: []
+      summary: Checkout Items
+      tags:
+      - checkout
+  /product:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ProductDto'
+      security:
+      - ApiKeyAuth: []
+      summary: List Product
+      tags:
+      - product
+  /sku:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Sku'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: List sku
+      tags:
+      - skus
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Sku'
+      security:
+      - ApiKeyAuth: []
+      summary: Create sku
+      tags:
+      - skus
+  /users:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.User'
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: List user
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Create user
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - ApiKeyAuth: []
+      summary: Delete user
+      tags:
+      - users
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Find user
+      tags:
+      - users
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+      security:
+      - ApiKeyAuth: []
+      summary: Update user
+      tags:
+      - users
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
