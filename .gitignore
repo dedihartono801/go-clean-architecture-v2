@@ -1,0 +1,7 @@
+.vscode
+.env
+tmp
+bin
+.idea
+cover.out
+cover.html
