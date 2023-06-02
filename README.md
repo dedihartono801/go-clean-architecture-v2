@@ -10,9 +10,9 @@ boilerplate modification from https://github.com/dedihartono801/go-clean-archite
 
    - `app/`: This folder contains the application-specific logic.
 
-     - `usecase/`: Contains the application's use cases or business logic. For example, `user.go` could define use cases related to user management.
+     - `usecase/`: Contains the application's use cases or business logic. For example, `user/service.go` could define use cases related to user management.
 
-     - `repository/`: This folder contains interfaces or contracts that define how to interact with external dependencies, such as databases or APIs. For example, `user_repository.go` could define the methods for fetching and saving user data.
+     - `repository/`: This folder contains interfaces or contracts that define how to interact with external dependencies, such as databases or APIs. For example, `user.go` could define the methods for fetching and saving user data.
 
    - `entity/`: This folder defines the application's entities or domain models. For example, `user.go` could define the user entity with its properties and behavior.
 
@@ -20,7 +20,7 @@ boilerplate modification from https://github.com/dedihartono801/go-clean-archite
 
      - `http/`: This folder contains the HTTP-specific code. For example, `user_handler.go` could define the HTTP handlers for user-related endpoints.
 
-3. `pkg/`: This folder contains shared packages or utilities that can be used by different parts of the application. For example, `logger/logger.go` could define a logger package used throughout the application.
+3. `pkg/`: This folder contains shared packages or utilities that can be used by different parts of the application. For example, `customstatus/status.go` could define a logger package used throughout the application.
 
    - `config/`: This folder holds configuration-related code. For example, `config.go` could define functions or methods for loading application configuration.
 
