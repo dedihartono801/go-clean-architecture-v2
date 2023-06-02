@@ -6,6 +6,9 @@ boilerplate modification from https://github.com/dedihartono801/go-clean-archite
 
 1. `cmd/`: This folder contains the application's entry point(s) or executable(s).
 
+   - `api/`: This folder contains the command to run the rest api.
+   - `worker/`: This folder contains the command to run worker queue.
+
 2. `internal/`: This folder holds the core application code. It is not accessible from outside the module/package.
 
    - `app/`: This folder contains the application-specific logic.
