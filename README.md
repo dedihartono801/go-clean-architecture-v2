@@ -4,7 +4,7 @@
 
 boilerplate modification from https://github.com/dedihartono801/go-clean-architecture
 
-cmd/: This folder contains the application's entry point(s) or executable(s). In this example, myapp is the main application.
+**cmd/**: This folder contains the application's entry point(s) or executable(s). In this example, myapp is the main application.
 
 internal/: This folder holds the core application code. It is not accessible from outside the module/package.
 
