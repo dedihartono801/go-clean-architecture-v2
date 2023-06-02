@@ -20,7 +20,7 @@ boilerplate modification from https://github.com/dedihartono801/go-clean-archite
 
      - `http/`: This folder contains the HTTP-specific code. For example, `user_handler.go` could define the HTTP handlers for user-related endpoints.
 
-3. `pkg/`: This folder contains shared packages or utilities that can be used by different parts of the application. For example, `customstatus/status.go` could define a logger package used throughout the application.
+3. `pkg/`: This folder contains shared packages or utilities that can be used by different parts of the application. For example, `customstatus/status.go` could define a custom status code and message package used throughout the application.
 
    - `config/`: This folder holds configuration-related code. For example, `config.go` could define functions or methods for loading application configuration.
 
