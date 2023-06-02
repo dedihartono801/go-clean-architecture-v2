@@ -6,25 +6,25 @@ boilerplate modification from https://github.com/dedihartono801/go-clean-archite
 
 **cmd/**: This folder contains the application's entry point(s) or executable(s). In this example, myapp is the main application.
 
-internal/: This folder holds the core application code. It is not accessible from outside the module/package.
+**internal/**: This folder holds the core application code. It is not accessible from outside the module/package.
 
-- app/: This folder contains the application-specific logic.
+- **app/**: This folder contains the application-specific logic.
 
-  - usecase/: Contains the application's use cases or business logic. For example, user.go could define use cases related to user management.
+  - **usecase/**: Contains the application's use cases or business logic. For example, user.go could define use cases related to user management.
 
-  - repository/: This folder contains interfaces or contracts that define how to interact with external dependencies, such as databases or APIs. For example, user_repository.go could define the methods for fetching and saving user data.
+  - **repository/**: This folder contains interfaces or contracts that define how to interact with external dependencies, such as databases or APIs. For example, user_repository.go could define the methods for fetching and saving user data.
 
-- entity/: This folder defines the application's entities or domain models. For example, user.go could define the user entity with its properties and behavior.
+- **entity/**: This folder defines the application's entities or domain models. For example, user.go could define the user entity with its properties and behavior.
 
-- delivery/: Contains the delivery mechanisms, such as HTTP handlers, used to interact with the outside world.
+- **delivery/**: Contains the delivery mechanisms, such as HTTP handlers, used to interact with the outside world.
 
-  - http/: This folder contains the HTTP-specific code. For example, user_handler.go could define the HTTP handlers for user-related endpoints.
+  - **http/**: This folder contains the HTTP-specific code. For example, user_handler.go could define the HTTP handlers for user-related endpoints.
 
-pkg/: This folder contains shared packages or utilities that can be used by different parts of the application. For example, logger/logger.go could define a logger package used throughout the application.
+**pkg/**: This folder contains shared packages or utilities that can be used by different parts of the application. For example, logger/logger.go could define a logger package used throughout the application.
 
-migrations/: This folder may contain database migration scripts or related files.
+**migrations/**: This folder may contain database migration scripts or related files.
 
-database/: This folder may contain database-specific code or configurations.
+**database/**: This folder may contain database-specific code or configurations.
 
 Examples of types of communication:
 
