@@ -55,6 +55,7 @@ Example:
 - unit testing with mock and table test
 - concurrency with goroutines by implementing mutex and locking rows to avoid race conditions (on checkout api)
 - worker queue using asynq library
+- worker queue using kafka
 
 ## Install Swagger
 
