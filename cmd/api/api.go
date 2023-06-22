@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"github.com/dedihartono801/go-clean-architecture-v2/cmd/api/routes"
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/kafka"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/redis"
 	handler "github.com/dedihartono801/go-clean-architecture-v2/internal/delivery/http"
 
@@ -21,7 +22,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func Run(database *gorm.DB, taskDistributor redis.TaskDistributor) {
+func Run(database *gorm.DB, taskDistributor redis.TaskDistributor, kafkaPrd kafka.Producer) {
 
 	identifier := identifier.NewIdentifier()
 	validator := validator.NewValidator(validatorv10.New())
@@ -47,7 +48,7 @@ func Run(database *gorm.DB, taskDistributor redis.TaskDistributor) {
 	skuHandler := handler.NewSkuHandler(skuService)
 
 	transactionRepository := repository.NewTransactionRepository(database)
-	transactionService := transaction.NewTransactionService(taskDistributor, dbTransactionRepository, transactionRepository, skuRepository, validator, identifier)
+	transactionService := transaction.NewTransactionService(kafkaPrd, taskDistributor, dbTransactionRepository, transactionRepository, skuRepository, validator, identifier)
 	transactionHandler := handler.NewTransactionHandler(transactionService)
 
 	app := fiber.New()

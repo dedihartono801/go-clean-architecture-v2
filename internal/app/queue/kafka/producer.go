@@ -1,91 +1,48 @@
 package kafka
 
 import (
-	"encoding/json"
-	"fmt"
-	"github.com/confluentinc/confluent-kafka-go/kafka"
-	"github.com/google/uuid"
-	"go.mongodb.org/mongo-driver/bson"
 	"log"
+
+	"github.com/Shopify/sarama"
 )
 
 type Producer interface {
-	SendMessage(topic string, body interface{}) error
+	SendMessage(topic string, kafkaMessage string) error
 }
 
 type producer struct {
-	producer *kafka.Producer
+	producer sarama.SyncProducer
 }
 
-func NewKafkaProducer(kafkaBroker string) Producer {
-	kafkaProducer, err := kafka.NewProducer(&kafka.ConfigMap{
-		"bootstrap.servers":     kafkaBroker,
-		"broker.address.family": "v4",
-		"security.protocol":     "PLAINTEXT",
-	})
+func NewKafkaProducer(broker string) (Producer, error) {
+	// Set up configuration for the Kafka producer
+	config := sarama.NewConfig()
+	config.Producer.Return.Successes = true
+
+	// Create a new Kafka producer
+	prd, err := sarama.NewSyncProducer([]string{broker}, config)
 	if err != nil {
-		log.Fatal("Error to connect to kafka", err)
-		return nil
+		return nil, err
 	}
 
-	go func() {
-		for e := range kafkaProducer.Events() {
-			switch ev := e.(type) {
-			case *kafka.Message:
-				if ev.TopicPartition.Error != nil {
-					fmt.Printf("Delivery failed: %v\n", ev.TopicPartition.Error)
+	return producer{prd}, nil
 
-				} else {
-					fmt.Printf("Delivered message to topic %s [%d] at offset %v\n",
-						*ev.TopicPartition.Topic, ev.TopicPartition.Partition, ev.TopicPartition.Offset)
-				}
-			case kafka.Error:
-				fmt.Printf("Error: %v\n", ev)
-
-			default:
-				fmt.Printf("Ignored event: %s\n", ev)
-			}
-
-		}
-	}()
-
-	return &producer{kafkaProducer}
 }
 
-func (p producer) SendMessage(topic string, body interface{}) error {
-	correlationID := uuid.New().String()
-
-	data := bson.M{
-		"body":       body,
-		"properties": []int{},
-		"headers": bson.M{
-			"contentType":   "application/json",
-			"correlationId": correlationID,
-		},
+func (prd producer) SendMessage(topic string, kafkaMessage string) error {
+	// Create a new Kafka message
+	message := &sarama.ProducerMessage{
+		Topic: topic,
+		Value: sarama.StringEncoder(kafkaMessage),
 	}
 
-	source, err := json.Marshal(data)
+	// Send the message to Kafka
+	partition, offset, err := prd.producer.SendMessage(message)
 	if err != nil {
-		fmt.Println("Error to parser data to byte", err)
 		return err
 	}
 
-	err = p.producer.Produce(&kafka.Message{
-		TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
-		Value:          source,
-		Key:            []byte(correlationID),
-		Headers: []kafka.Header{
-			{Key: "correlationId", Value: []byte(correlationID)},
-			{Key: "applicationName", Value: []byte("ms-miniapp")},
-		},
-	}, nil)
-	if err != nil {
-		fmt.Println("Error to sned message to kafka producer", err)
-		return err
-	}
-
-	p.producer.Flush(-1)
-	fmt.Println("Message sent to kafka producer")
-
+	log.Printf("Message sent to partition %d at offset %d", partition, offset)
 	return nil
+
 }

@@ -6,9 +6,11 @@ import (
 	"sync"
 	"time"
 
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/kafka"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/redis"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/entity"
+	"github.com/dedihartono801/go-clean-architecture-v2/pkg/config"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/customstatus"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/dto"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/identifier"
@@ -23,6 +25,7 @@ type Service interface {
 }
 
 type service struct {
+	kafkaProducer           kafka.Producer
 	workerTask              redis.TaskDistributor
 	dbTransactionRepository repository.DbTransactionRepository
 	transactionRepository   repository.TransactionRepository
@@ -33,6 +36,7 @@ type service struct {
 }
 
 func NewTransactionService(
+	kafkaProducer kafka.Producer,
 	workerTask redis.TaskDistributor,
 	dbTransactionRepository repository.DbTransactionRepository,
 	transactionRepository repository.TransactionRepository,
@@ -41,6 +45,7 @@ func NewTransactionService(
 	identifier identifier.Identifier,
 ) Service {
 	return &service{
+		kafkaProducer:           kafkaProducer,
 		workerTask:              workerTask,
 		dbTransactionRepository: dbTransactionRepository,
 		transactionRepository:   transactionRepository,
@@ -135,6 +140,12 @@ func (s *service) Checkout(ctx *fiber.Ctx, input *dto.TransactionCheckoutDto) (*
 	}
 
 	codeError, err := s.workerTask.DistributeTaskSendEmail(taskPayload, opts...)
+	if err != nil {
+		tx.Rollback()
+		return nil, codeError, errors.New(err.Error())
+	}
+
+	err = s.kafkaProducer.SendMessage(config.GetEnv("TOPIC"), email)
 	if err != nil {
 		tx.Rollback()
 		return nil, codeError, errors.New(err.Error())

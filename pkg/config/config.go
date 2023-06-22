@@ -16,6 +16,9 @@ type Config struct {
 	DatabasePort     string `envconfig:"DATABASE_PORT" default:"3306"`
 	MongoAddress     string `envconfig:"MONGO_ADDRESS" default:"mongodb://localhost:27017"`
 	RedisAddress     string `envconfig:"REDIS_ADDRESS" default:"redis:6379"`
+	KafkaAdress      string `envconfig:"KAFKA_ADDRESS" default:"kafka:9092"`
+	ConsumerGroup    string `envconfig:"CONSUMER_GROUP" default:"my-consumer-group"`
+	Topic            string `envconfig:"TOPIC" default:"my-topic"`
 }
 
 func SetupEnvFile() *Config {

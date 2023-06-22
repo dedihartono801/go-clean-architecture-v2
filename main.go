@@ -2,10 +2,12 @@ package main
 
 import (
 	"context"
+	"log"
 
 	"github.com/dedihartono801/go-clean-architecture-v2/cmd/api"
 	"github.com/dedihartono801/go-clean-architecture-v2/cmd/worker"
 	"github.com/dedihartono801/go-clean-architecture-v2/database"
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/kafka"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/queue/redis"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/config"
 	"github.com/gofiber/swagger"
@@ -34,8 +36,13 @@ func main() {
 	}
 	ctx := context.Background()
 	taskDistributor := redis.NewRedisTaskDistributor(redisOpt, ctx)
+	kafkaProducer, err := kafka.NewKafkaProducer(envConfig.KafkaAdress)
+	if err != nil {
+		log.Fatalf(err.Error())
+	}
 
 	mysql := database.InitMysql(envConfig)
-	go worker.RunQueueRedisServer(*envConfig, redisOpt)
-	api.Run(mysql, taskDistributor)
+	go worker.RunRedisWorker(*envConfig, redisOpt)
+	go worker.RunKafkaWorker(envConfig.KafkaAdress, envConfig.ConsumerGroup, envConfig.Topic)
+	api.Run(mysql, taskDistributor, kafkaProducer)
 }
