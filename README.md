@@ -46,6 +46,7 @@ Examples of data persistence:
 Example:
 
 - rest api
+- grpc
 - Dockerfile with multi stage build (for prod/staging)
 - DockerfileDev (for local environment)
 - Docker-compose
