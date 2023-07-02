@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package transaction;
+
+option go_package = "github.com/dedihartono801/go-clean-architecture-v2/pkg/protobuf";
+
+service TransactionService {
+    rpc TransactionDetail(TransactionId) returns (TransactionResponse) {}
+  }
+
+message TransactionId {
+  string id = 1;
+}
+
+message FindOneData {
+  string id = 1;
+  string admin_id = 2;
+  int32 total_quantity = 3;
+  int32 total_transaction = 4;
+}
+
+message TransactionResponse {
+    int32 status = 1;
+    string error = 2;
+    FindOneData data = 3;
+}

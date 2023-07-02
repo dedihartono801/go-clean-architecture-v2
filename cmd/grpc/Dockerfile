@@ -30,7 +30,7 @@ COPY . .
 RUN go mod vendor
 
 # Build the Go app into binary file
-RUN  go build -o ${APP_NAME} -v
+RUN  go build -o ${APP_NAME} -v ./cmd/grpc
 
 RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace
 

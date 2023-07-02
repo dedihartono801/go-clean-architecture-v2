@@ -39,6 +39,7 @@ func NewKafkaConsumer(kafkaBroker string, groupConsumer string) (Consumer, error
 // Helper function to start the consumer group and handle messages
 func (csmr consumer) StartConsumerGroup(ready chan<- bool, topic string) error {
 	for {
+		log.Println("start worker kafka")
 		err := csmr.consumer.Consume(context.Background(), []string{topic}, &MyConsumerGroupHandler{})
 		if err != nil {
 			return err
@@ -132,7 +133,7 @@ func processMessage(msg *sarama.ConsumerMessage) error {
 		return err
 	}
 
-	log.Println("Email sent successfully!")
+	log.Println("Email sent successfully with kafka!")
 
 	return nil
 }

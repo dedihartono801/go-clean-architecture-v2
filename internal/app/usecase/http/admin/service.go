@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/dedihartono801/go-clean-architecture-v2/cmd/api/middleware"
+	"github.com/dedihartono801/go-clean-architecture-v2/cmd/http/middleware"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/entity"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/customstatus"

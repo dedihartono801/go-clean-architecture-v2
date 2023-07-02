@@ -1,16 +1,29 @@
 version: '3.8'
 
 services:
-  go-clean-arch:
-    container_name: go-app
+  go-clean-arch-rest:
+    container_name: go-app-rest
     restart: always
     volumes:
       - .:/app
     build:
       context: .
-      dockerfile: DockerfileDev
+      dockerfile: cmd/http/DockerfileDev
     ports:
       - "5001:5001"
+    networks:
+      - bubble
+
+  go-clean-arch-grpc:
+    container_name: go-app-grpc
+    restart: always
+    volumes:
+      - .:/app
+    build:
+      context: .
+      dockerfile: cmd/grpc/DockerfileDev
+    ports:
+      - "5002:5002"
     networks:
       - bubble
 

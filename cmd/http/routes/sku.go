@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/dedihartono801/go-clean-architecture-v2/cmd/api/middleware"
+	"github.com/dedihartono801/go-clean-architecture-v2/cmd/http/middleware"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/delivery/http"
 	"github.com/gofiber/fiber/v2"
 )

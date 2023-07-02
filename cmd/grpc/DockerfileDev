@@ -22,4 +22,4 @@ RUN apk update && apk add make
 EXPOSE 5001
 
 # Start app
-CMD make dev
+CMD make grpc-dev

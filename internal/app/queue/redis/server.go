@@ -77,7 +77,7 @@ func (processor *RedisTaskServer) ProcessTaskSendEmail(ctx context.Context, task
 	if err != nil {
 		log.Println(err)
 	} else {
-		log.Println("Email sent successfully!")
+		log.Println("Email sent successfully with redis!")
 	}
 	return nil
 }

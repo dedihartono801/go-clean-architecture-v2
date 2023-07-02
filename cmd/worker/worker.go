@@ -16,9 +16,9 @@ func RunRedisWorker(config config.Config, redisOpt asynq.RedisClientOpt) {
 	taskProcessor := redis.NewServer(redisOpt)
 	err := taskProcessor.Start()
 	if err != nil {
-		log.Fatalf("failed to start worker")
+		log.Fatalf("failed to start worker redis")
 	}
-	log.Println("start worker")
+	log.Println("start worker redis")
 }
 
 func RunKafkaWorker(broker string, groupConsumer string, topic string) {

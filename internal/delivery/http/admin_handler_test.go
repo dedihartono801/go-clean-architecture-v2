@@ -9,8 +9,8 @@ import (
 	"net/http/httptest"
 
 	repoMock "github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository/mock"
-	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/admin"
-	usecaseMock "github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/admin/mock"
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/http/admin"
+	usecaseMock "github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/http/admin/mock"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/identifier"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/validator"
 	validatorv10 "github.com/go-playground/validator/v10"

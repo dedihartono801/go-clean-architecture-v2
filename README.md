@@ -65,6 +65,12 @@ go install github.com/swaggo/swag/cmd/swag@latest
 
 go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
+## Install grpcurl using homebrew
+
+```bash
+$ brew install grpcurl
+```
+
 ## Run Service
 
 ```bash
@@ -125,6 +131,12 @@ $ docker exec -it go-app /bin/sh
 $ go run cmd/main.go user create -n=teste -e=teste@gmail.com
 #update user
 $ go run cmd/main.go user update -n=teste -e=teste@gmail.com -i=9cc26bf0-1272-45c8-93c5-1d83cfe82033
+```
+
+## Request GRPC api using grpcurl
+
+```bash
+$ grpcurl -plaintext -d '{"id": "change with id transaction"}' localhost:5002 transaction.TransactionService.TransactionDetail
 ```
 
 ## API Documentation

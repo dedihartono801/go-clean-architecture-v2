@@ -1,0 +1,25 @@
+# Start from golang base image
+FROM golang:alpine
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy go mod and go sum files
+COPY go.mod go.sum ./
+
+# Download required dependencies
+RUN go mod download 
+
+# Copy entire source code from current directory to the working directory inside container
+COPY . . 
+
+# Get Reflex for live reload in dev
+RUN go install github.com/cespare/reflex@latest
+
+RUN apk update && apk add make
+
+# Expose port
+EXPOSE 5001
+
+# Start app
+CMD make rest-dev

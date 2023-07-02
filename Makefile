@@ -1,7 +1,16 @@
 GOPATH ?= $(HOME)/go
 
-run-api:
-	go run main.go
+ifeq ($(OS), Windows_NT)
+	PACKAGE = $(shell (Get-Content go.mod -head 1).Split(" ")[1])
+else
+	PACKAGE = $(shell head -1 go.mod | awk '{print $$2}')
+endif
+
+run-rest:
+	go run cmd/http/main.go
+
+run-grpc:
+	go run cmd/grpc/main.go
 
 run-cmd:
 	go run cmd/main.go
@@ -9,8 +18,11 @@ run-cmd:
 format:
 	go fmt ./...
 
-dev:
-	DC_APP_ENV=dev $(GOPATH)/bin/reflex -s -r '\.go$$' make format run-api
+rest-dev:
+	DC_APP_ENV=dev $(GOPATH)/bin/reflex -s -r '\.go$$' make format run-rest
+
+grpc-dev:
+	DC_APP_ENV=dev $(GOPATH)/bin/reflex -s -r '\.go$$' make format run-grpc
 
 test-cov:
 	go test -coverprofile=cover.out ./... && go tool cover -html=cover.out -o cover.html
@@ -31,3 +43,6 @@ migration-down:
 migration $$(enter):
 	@read -p "Migration name:" migration_name; \
 	migrate create -ext sql -dir migrations $$migration_name
+
+proto:
+	protoc -I ./pkg/protobuf --go_opt=module=${PACKAGE} --go_out=. --go-grpc_opt=module=${PACKAGE} --go-grpc_opt=require_unimplemented_servers=false --go-grpc_out=. ./pkg/protobuf/*.proto

@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	repoMock "github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository/mock"
-	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/admin"
+	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/http/admin"
 	"github.com/dedihartono801/go-clean-architecture-v2/internal/entity"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/customstatus"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/dto"
