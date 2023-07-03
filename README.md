@@ -28,7 +28,7 @@ brief description of the folder structure:
 
      - `http/`: This folder contains the HTTP-specific code. For example, `user_handler.go` could define the HTTP handlers for user-related endpoints.
 
-     - `grpc/`: This folder contains the HTTP-specific code. For example, `transaction.go` could define the GRPC handlers for transaction-related endpoints.
+     - `grpc/`: This folder contains the GRPC-specific code. For example, `transaction.go` could define the GRPC handlers for transaction-related endpoints.
 
 3. `pkg/`: This folder contains shared packages or utilities that can be used by different parts of the application. For example, `customstatus/status.go` could define a custom status code and message package used throughout the application.
 
