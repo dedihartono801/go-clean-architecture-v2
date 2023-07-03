@@ -4,14 +4,19 @@
 
 boilerplate modification from https://github.com/dedihartono801/go-clean-architecture
 
+brief description of the folder structure:
+
 1. `cmd/`: This folder contains the application's entry point(s) or executable(s).
 
-   - `api/`: This folder contains the command to run the rest api.
+   - `http/`: This folder contains the command to run the rest api.
+   - `grpc/`: This folder contains the command to run the grpc api.
    - `worker/`: This folder contains the command to run worker queue.
 
 2. `internal/`: This folder holds the core application code. It is not accessible from outside the module/package.
 
    - `app/`: This folder contains the application-specific logic.
+
+     - `queue/`: Contains the application's queue business logic.
 
      - `usecase/`: Contains the application's use cases or business logic. For example, `user/service.go` could define use cases related to user management.
 
@@ -22,6 +27,8 @@ boilerplate modification from https://github.com/dedihartono801/go-clean-archite
    - `delivery/`: Contains the delivery mechanisms, such as HTTP handlers, used to interact with the outside world.
 
      - `http/`: This folder contains the HTTP-specific code. For example, `user_handler.go` could define the HTTP handlers for user-related endpoints.
+
+     - `grpc/`: This folder contains the HTTP-specific code. For example, `transaction.go` could define the GRPC handlers for transaction-related endpoints.
 
 3. `pkg/`: This folder contains shared packages or utilities that can be used by different parts of the application. For example, `customstatus/status.go` could define a custom status code and message package used throughout the application.
 
