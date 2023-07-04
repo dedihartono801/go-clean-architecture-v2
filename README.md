@@ -54,16 +54,16 @@ Example:
 
 - rest api
 - grpc
+- worker queue using asynq library (redis)
+- worker queue using kafka
+- concurrency with goroutines by implementing mutex and locking rows to avoid race conditions (on checkout api)
 - Dockerfile with multi stage build (for prod/staging)
 - DockerfileDev (for local environment)
 - Docker-compose
-- swagger for doc
+- swagger
 - middleware auth jwt
 - migration
 - unit testing with mock and table test
-- concurrency with goroutines by implementing mutex and locking rows to avoid race conditions (on checkout api)
-- worker queue using asynq library
-- worker queue using kafka
 
 ## Install Swagger
 
