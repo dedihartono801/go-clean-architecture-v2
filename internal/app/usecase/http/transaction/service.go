@@ -82,10 +82,12 @@ func (s *service) Checkout(ctx *fiber.Ctx, input *dto.TransactionCheckoutDto) (*
 	for _, items := range input.Items {
 		item := items
 		g.Go(func() error {
+
+			//mutex to avoid race condition
 			s.skuMutex.Lock()
 			defer s.skuMutex.Unlock()
 
-			// find the selected SKU and locking row (select for update)
+			// find the selected SKU and locking row (select for update) to avoid race condition on database
 			sku, err := s.skuRepository.GetSkuById(tx, item.ID)
 			if err != nil {
 				tx.Rollback()
