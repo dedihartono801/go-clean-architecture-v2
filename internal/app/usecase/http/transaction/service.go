@@ -79,10 +79,10 @@ func (s *service) Checkout(ctx *fiber.Ctx, input *dto.TransactionCheckoutDto) (*
 
 	totalPrice := 0
 	totalQuantity := 0
-
-	//process item using goroutine
 	for _, items := range input.Items {
 		item := items
+
+		//process item using goroutine
 		g.Go(func() error {
 
 			//mutex to avoid race condition
