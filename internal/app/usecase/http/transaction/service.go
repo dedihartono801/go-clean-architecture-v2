@@ -79,6 +79,8 @@ func (s *service) Checkout(ctx *fiber.Ctx, input *dto.TransactionCheckoutDto) (*
 
 	totalPrice := 0
 	totalQuantity := 0
+
+	//process item using goroutine
 	for _, items := range input.Items {
 		item := items
 		g.Go(func() error {
