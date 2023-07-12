@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package example;
+
+option go_package = "github.com/dedihartono801/go-clean-architecture-v2/pkg/protobuf";
+
+service ExampleService {
+    rpc ExampleDetail(ExampleId) returns (ExampleResponse) {}
+  }
+
+message ExampleId {
+  string id = 1;
+}
+
+message ExampleResponse {
+    int32 id = 1;
+    string respoonse = 2;
+}

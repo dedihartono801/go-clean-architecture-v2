@@ -19,6 +19,7 @@ type Config struct {
 	KafkaAdress      string `envconfig:"KAFKA_ADDRESS" default:"kafka:9092"`
 	ConsumerGroup    string `envconfig:"CONSUMER_GROUP" default:"my-consumer-group"`
 	Topic            string `envconfig:"TOPIC" default:"my-topic"`
+	ExamplSvcUrl     string `envconfig:"EXAMPLE_SERVICE" default:"change with example service url grpc"`
 }
 
 func SetupEnvFile() *Config {
