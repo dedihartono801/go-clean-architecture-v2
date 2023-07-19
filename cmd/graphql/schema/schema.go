@@ -5,7 +5,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-// GenerateSchema will create a GraphQL Schema and set the Resolvers found in the GopherService
+// GenerateSchema will create a GraphQL Schema and set the Resolvers found in the UserService
 // For all the needed fields
 func GenerateSchema(ur graphqlResolver.UserResovler, jr graphqlResolver.JobResovler) (*graphql.Schema, error) {
 	userType := generateUserType(jr)
@@ -13,7 +13,7 @@ func GenerateSchema(ur graphqlResolver.UserResovler, jr graphqlResolver.JobResov
 	user := createUserFields(userType, ur)
 	// RootQuery
 	fields := graphql.Fields{
-		// We define the Gophers query
+		// We define the user query
 		"users": &users,
 		"user":  &user,
 	}
