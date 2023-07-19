@@ -54,6 +54,7 @@ Example:
 
 - rest api
 - grpc
+- graphql
 - worker queue using asynq library (redis)
 - worker queue using kafka
 - concurrency with goroutines by implementing mutex and locking rows to avoid race conditions (on checkout api)

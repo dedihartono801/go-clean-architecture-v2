@@ -12,6 +12,9 @@ run-rest:
 run-grpc:
 	go run cmd/grpc/main.go
 
+run-graphql:
+	go run cmd/graphql/main.go
+
 run-cmd:
 	go run cmd/main.go
 
@@ -23,6 +26,9 @@ rest-dev:
 
 grpc-dev:
 	DC_APP_ENV=dev $(GOPATH)/bin/reflex -s -r '\.go$$' make format run-grpc
+
+graphql-dev:
+	DC_APP_ENV=dev $(GOPATH)/bin/reflex -s -r '\.go$$' make format run-graphql
 
 test-cov:
 	go test -coverprofile=cover.out ./... && go tool cover -html=cover.out -o cover.html

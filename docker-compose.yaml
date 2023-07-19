@@ -27,6 +27,19 @@ services:
     networks:
       - bubble
 
+  go-clean-arch-graphql:
+    container_name: go-app-graphql
+    restart: always
+    volumes:
+      - .:/app
+    build:
+      context: .
+      dockerfile: cmd/graphql/DockerfileDev
+    ports:
+      - "5003:5003"
+    networks:
+      - bubble
+
   mysql:
     container_name: mysql
     image: mysql:8.0.32
