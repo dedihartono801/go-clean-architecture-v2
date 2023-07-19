@@ -6,7 +6,7 @@ import (
 	"github.com/graphql-go/graphql"
 )
 
-// genereateGopherType will assemble the Gophertype and all related fields
+// genereateUserType will assemble the Usertype and all related fields
 func generateUserType(jr graphqlResolver.JobResovler) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "User",
@@ -24,22 +24,22 @@ func generateUserType(jr graphqlResolver.JobResovler) *graphql.Object {
 				Type:        graphql.String,
 				Description: "The email of the user",
 			},
-			// Here we create a graphql.Field which is depending on the jobs repository, notice how the Gopher struct does not contain any information about jobs
+			// Here we create a graphql.Field which is depending on the jobs repository, notice how the User struct does not contain any information about jobs
 			// But this still works
 			"jobs": generateJobsField(jr),
 		}})
 }
 
-// Fungsi untuk membuat field-field terkait gopher
+// Fungsi untuk membuat field-field terkait User
 func createUsersFields(userType graphql.Type, ur graphqlResolver.UserResovler) graphql.Field {
 	return graphql.Field{
 		Type:        graphql.NewList(userType),
 		Resolve:     ur.ResolveUsers,
-		Description: "Query all Gophers",
+		Description: "Query all Users",
 	}
 }
 
-// Fungsi untuk membuat field-field terkait gopher
+// Fungsi untuk membuat field-field terkait user
 func createUserFields(userType graphql.Type, ur graphqlResolver.UserResovler) graphql.Field {
 	return graphql.Field{
 		Type:        userType,
