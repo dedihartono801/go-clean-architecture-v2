@@ -44,7 +44,7 @@ func (imr *memoryUserRepository) GetUsers() ([]entity.User, error) {
 	return imr.user, nil
 }
 
-// GetUsers will return a goper by its ID
+// GetUsers will return a user by its ID
 func (imr *memoryUserRepository) GetUser(id string) (entity.User, error) {
 	for _, user := range imr.user {
 		if user.ID == id {

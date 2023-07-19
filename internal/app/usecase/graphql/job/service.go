@@ -39,7 +39,7 @@ func (s *service) GetJobs(p graphql.ResolveParams) ([]entity.Job, error) {
 	g, ok := p.Source.(entity.User)
 
 	if !ok {
-		return nil, errors.New("source was not a Gopher")
+		return nil, errors.New("source was not a User")
 	}
 	// Here we extract the Argument Company
 	company := ""

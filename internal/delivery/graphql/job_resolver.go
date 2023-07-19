@@ -18,10 +18,10 @@ func NewJobResolver(service job.Service) JobResovler {
 	return &jobResolver{service}
 }
 
-// ResolveJobs is used to find all jobs related to a gopher
+// ResolveJobs is used to find all jobs related to a user
 func (gs *jobResolver) ResolveJobs(p graphql.ResolveParams) (interface{}, error) {
 
-	// Find Jobs Based on the Gophers ID
+	// Find Jobs Based on the Users ID
 	jobs, err := gs.service.GetJobs(p)
 	if err != nil {
 		return nil, err
