@@ -9,8 +9,8 @@ import (
 	"net/http/httptest"
 
 	repoMock "github.com/dedihartono801/go-clean-architecture-v2/internal/app/repository/mock"
-	"github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/http/admin"
 	usecaseMock "github.com/dedihartono801/go-clean-architecture-v2/internal/app/usecase/http/admin/mock"
+	adminDto "github.com/dedihartono801/go-clean-architecture-v2/pkg/dto"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/identifier"
 	"github.com/dedihartono801/go-clean-architecture-v2/pkg/validator"
 	validatorv10 "github.com/go-playground/validator/v10"
@@ -84,7 +84,7 @@ func TestCreate(t *testing.T) {
 	app := fiber.New()
 
 	// Define test cases
-	input := &admin.CreateDto{
+	input := &adminDto.AdminCreateDto{
 		Name:     "diding",
 		Email:    "diding@gmail.com",
 		Password: "rtdfxc@123",
@@ -92,7 +92,7 @@ func TestCreate(t *testing.T) {
 	// Define test cases
 	testCases := []struct {
 		name       string
-		input      *admin.CreateDto
+		input      *adminDto.AdminCreateDto
 		statusCode int
 		wantErr    bool
 	}{

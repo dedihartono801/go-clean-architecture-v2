@@ -13,7 +13,7 @@ import (
 
 type Service interface {
 	List() ([]entity.User, error)
-	Find(id string) (entity.User, error)
+	Find(id string) (*entity.User, error)
 	Create(input *dto.UserCreateDto) (*entity.User, int, error)
 	Update(id string, input *dto.UserUpdateDto) (*entity.User, int, error)
 	Delete(id string) error
@@ -41,7 +41,7 @@ func (s *service) List() ([]entity.User, error) {
 	return s.repository.List()
 }
 
-func (s *service) Find(id string) (entity.User, error) {
+func (s *service) Find(id string) (*entity.User, error) {
 	return s.repository.Find(id)
 }
 
@@ -72,10 +72,10 @@ func (s *service) Update(id string, input *dto.UserUpdateDto) (*entity.User, int
 	user.Name = input.Name
 	user.Email = input.Email
 
-	if err := s.repository.Update(&user); err != nil {
+	if err := s.repository.Update(user); err != nil {
 		return nil, customstatus.ErrInternalServerError.Code, errors.New(customstatus.ErrInternalServerError.Message)
 	}
-	return &user, customstatus.StatusOk.Code, nil
+	return user, customstatus.StatusOk.Code, nil
 }
 
 func (s *service) Delete(id string) error {
@@ -84,5 +84,5 @@ func (s *service) Delete(id string) error {
 		return errors.New(customstatus.ErrNotFound.Message)
 	}
 
-	return s.repository.Delete(&user)
+	return s.repository.Delete(user)
 }

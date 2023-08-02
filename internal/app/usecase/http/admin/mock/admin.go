@@ -19,13 +19,13 @@ type Service interface {
 }
 
 type mockService struct {
-	repository repoMock.AdminRepository
+	repository repoMock.MockAdminRepository
 	validator  validator.Validator
 	identifier identifier.Identifier
 }
 
 func NewMockAdminService(
-	repository repoMock.AdminRepository,
+	repository repoMock.MockAdminRepository,
 	validator validator.Validator,
 	identifier identifier.Identifier,
 ) Service {

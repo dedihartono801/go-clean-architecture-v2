@@ -7,7 +7,7 @@ import (
 
 type UserRepository interface {
 	List() ([]entity.User, error)
-	Find(id string) (entity.User, error)
+	Find(id string) (*entity.User, error)
 	Create(user *entity.User) error
 	Update(user *entity.User) error
 	Delete(user *entity.User) error
@@ -27,10 +27,10 @@ func (r *userRepository) List() ([]entity.User, error) {
 	return users, err
 }
 
-func (r *userRepository) Find(id string) (entity.User, error) {
+func (r *userRepository) Find(id string) (*entity.User, error) {
 	user := entity.User{ID: id}
 	err := r.database.First(&user).Error
-	return user, err
+	return &user, err
 }
 
 func (r *userRepository) Create(user *entity.User) error {

@@ -7,7 +7,7 @@ import (
 )
 
 // Define the MockAdminRepository interface
-type AdminRepository interface {
+type MockAdminRepository interface {
 	Find(id string) (*entity.Admin, error)
 	Create(admin *entity.Admin) error
 	FindByEmail(email string) (*entity.Admin, error)
@@ -17,7 +17,7 @@ type mockAdminRepository struct {
 	admin map[string]*entity.Admin
 }
 
-func NewMockAdminRepository() AdminRepository {
+func NewMockAdminRepository() MockAdminRepository {
 	return &mockAdminRepository{
 		admin: make(map[string]*entity.Admin),
 	}
