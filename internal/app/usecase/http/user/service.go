@@ -75,7 +75,7 @@ func (s *service) Update(id string, input *dto.UserUpdateDto) (*entity.User, int
 	if err := s.repository.Update(user); err != nil {
 		return nil, customstatus.ErrInternalServerError.Code, errors.New(customstatus.ErrInternalServerError.Message)
 	}
-	return user, customstatus.StatusOk.Code, nil
+	return user, customstatus.StatusCreated.Code, nil
 }
 
 func (s *service) Delete(id string) error {

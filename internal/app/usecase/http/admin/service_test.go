@@ -78,13 +78,13 @@ func TestCreate(t *testing.T) {
 		name       string
 		input      *dto.AdminCreateDto
 		statusCode int
-		wantErr    bool
+		wantErr    error
 	}{
 		{
 			name:       "Success Create data",
 			input:      expected,
 			statusCode: 201,
-			wantErr:    false,
+			wantErr:    nil,
 		},
 	}
 
@@ -95,7 +95,7 @@ func TestCreate(t *testing.T) {
 			rest, statusCode, err := srv.Create(tc.input)
 			//fmt.Println(err.Error())
 			assert.Equal(t, tc.statusCode, statusCode, "Expected status code and actual status code should be equal")
-			assert.Equal(t, tc.wantErr, err != nil, "Expected error and actual error should be equal")
+			assert.Equal(t, tc.wantErr, err, "Expected error and actual error should be equal")
 			assert.Equal(t, expected.Name, rest.Name, "Expected name and actual name should be equal")
 			assert.Equal(t, expected.Email, rest.Email, "Expected email and actual email should be equal")
 		})
